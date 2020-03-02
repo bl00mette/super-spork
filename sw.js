@@ -27,20 +27,20 @@ workbox.core.clientsClaim();
  */
 self.__precacheManifest = [
   {
-    "url": "webpack-runtime-2d3de5ffa64f61330c9b.js"
+    "url": "webpack-runtime-86ccd7aa7951579efb5b.js"
   },
   {
     "url": "commons-58d961fdf366b72c277e.js"
   },
   {
-    "url": "app-15586f78b9789ac520c5.js"
+    "url": "app-530713e35675efc09fd4.js"
   },
   {
     "url": "component---node-modules-gatsby-plugin-offline-app-shell-js-9ba2fbf88e7279b63663.js"
   },
   {
     "url": "offline-plugin-app-shell-fallback/index.html",
-    "revision": "d4e3e28b34224293ebfe7fda36cc8a1f"
+    "revision": "1bfd3f4123056b953215e5528223562e"
   },
   {
     "url": "page-data/offline-plugin-app-shell-fallback/page-data.json",
@@ -48,11 +48,11 @@ self.__precacheManifest = [
   },
   {
     "url": "page-data/app-data.json",
-    "revision": "0becb70b6defa6b34325e8122ec05021"
+    "revision": "884dbb2517019fce46583b022d57ff37"
   },
   {
     "url": "manifest.webmanifest",
-    "revision": "2144b367050e2439a4d09fd008b3040f"
+    "revision": "ae10c7e43fc9f9fc975d2fdc66382677"
   }
 ].concat(self.__precacheManifest || []);
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
@@ -140,12 +140,12 @@ const navigationRoute = new NavigationRoute(async ({ event }) => {
   lastNavigationRequest = event.request.url
 
   let { pathname } = new URL(event.request.url)
-  pathname = pathname.replace(new RegExp(`^`), ``)
+  pathname = pathname.replace(new RegExp(`^/super-spork`), ``)
 
   // Check for resources + the app bundle
   // The latter may not exist if the SW is updating to a new version
   const resources = await idbKeyval.get(`resources:${pathname}`)
-  if (!resources || !(await caches.match(`/app-15586f78b9789ac520c5.js`))) {
+  if (!resources || !(await caches.match(`/super-spork/app-530713e35675efc09fd4.js`))) {
     return await fetch(event.request)
   }
 
@@ -158,7 +158,7 @@ const navigationRoute = new NavigationRoute(async ({ event }) => {
     }
   }
 
-  const offlineShell = `/offline-plugin-app-shell-fallback/index.html`
+  const offlineShell = `/super-spork/offline-plugin-app-shell-fallback/index.html`
   const offlineShellWithKey = workbox.precaching.getCacheKeyForURL(offlineShell)
   return await caches.match(offlineShellWithKey)
 })
